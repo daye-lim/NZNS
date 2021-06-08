@@ -48,7 +48,6 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public int remove(Long rno) {
 		ReplyVO vo = mapper.read(rno);
-		
 		boardMapper.updateReplyCnt(vo.getBno(), -1);
 		return mapper.delete(rno);
 	}
@@ -58,7 +57,6 @@ public class ReplyServiceImpl implements ReplyService{
 		return mapper.getListWithPaging(cri, bno);
 	}
 
-	// ReplyPageDTO¸¦ ¹ÝÈ¯
 	@Override
 	public ReplyPageDTO getListPage(Criteria cri, Long bno) {
 		return new ReplyPageDTO(

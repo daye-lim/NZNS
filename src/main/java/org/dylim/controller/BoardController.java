@@ -44,11 +44,11 @@ public class BoardController {
 	public void list(Criteria cri, Model model) {
 		
 		log.info("list: "+cri);
-		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("list", service.getList(cri)); // 검색 이후 결과도 페이징 처리
 		
 		int total = service.getTotal(cri);
 		log.info("total: "+total);
-		model.addAttribute("pageMaker", new PageDTO(cri,total));	// 파라미터 = cri와 전체 데이터수(total)
+		model.addAttribute("pageMaker", new PageDTO(cri,total));
 		
 	}
 
@@ -160,7 +160,7 @@ public class BoardController {
 	/* 첨부파일 목록 */
 	@GetMapping(value = "/getAttachList",
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody // BoardController는 @RestController로 작성되지 않았으므로 @ResponseBody추가
+	@ResponseBody 
 	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno){
 		log.info("getAttachList " + bno);
 		return new ResponseEntity<>(service.getAttachList(bno),HttpStatus.OK);

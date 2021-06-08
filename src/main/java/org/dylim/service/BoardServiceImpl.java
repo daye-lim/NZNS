@@ -87,14 +87,6 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
-//	@Override
-//	// 게시물 목록 조회
-//	public List<BoardVO> getList() {
-//
-//		log.info("getList...............");
-//		return mapper.getList();
-//		
-//	}
 
 	@Override
 	// 게시물 목록 조회 (페이징)

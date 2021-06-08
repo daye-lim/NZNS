@@ -190,17 +190,8 @@ color:#369;}
 </div>
 
 
-
-                        	
-                        	
-                        	
-
-                        	        
-
-
 		
-<!-- Modal 
-         	   브라우저에서 댓글에 대한 CRUD 작업에서 활용할 것이므로 필요한 모든 내용을 담도록 하고 각 작업에 맞게 버튼이나 입력창이 보이거나 감춰지도록 한다-->
+			<!-- 댓글 모달창 -->
            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                   <div class="modal-content">
@@ -263,9 +254,6 @@ color:#369;}
  </script> 
 
  <script>
- 	console.log("===================");
- 	console.log("JS TEST");
- 	
  	var bnoValue = '<c:out value="${board.bno}"/>';
 
  	
@@ -274,8 +262,7 @@ color:#369;}
  		console.log(data);
  	});
  	
- </script>
- 
+ </script> 
  
  <!--댓글 목록 이벤트 처리 -->
  <script>
@@ -311,7 +298,6 @@ color:#369;}
 				for (var i = 0, len = list.length || 0; i < len; i++){
 					str +="<li class='left clearfix' data-rno='"+ list[i].rno+"'>";
 					str +="	<div><div class='header'><strong class='primary-font'>[" + list[i].rno+"] "+list[i].replyer+"</strong>";
-					//													p.418 replyService.displayTime 추가
 					str +="		<small class='pull-right text-muted'>" + replyService.displayTime(list[i].replyDate)+"</small></div>";
 					str +="			<p>" + list[i].reply + "</p></div></li>";
 				}
@@ -345,9 +331,8 @@ color:#369;}
 				});
 				
 				
-			//새로운 댓글 추가
-			
-			modalRegisterBtn.on("click", function(e){//댓글쓰기
+			//새로운 댓글 추가			
+			modalRegisterBtn.on("click", function(e){
 				
 				var reply = {
 					reply: modalInputReply.val(),

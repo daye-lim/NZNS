@@ -7,9 +7,7 @@ import org.dylim.domain.BoardVO;
 import org.dylim.domain.Criteria;
 
 public interface BoardMapper {
-	
-	// 전체 목록 조회 
-	public List<BoardVO> getList();
+
 	
 	// 전체 목록 조회 (페이징)
 	public List<BoardVO> getListWithPaging(Criteria cri);
@@ -21,8 +19,7 @@ public interface BoardMapper {
 	public void insert(BoardVO board);
 	
 	//  (insert-PK값 알필요O)
-	public void insertSelectKey(BoardVO board);
-	
+	public void insertSelectKey(BoardVO board);	
 	
 	// 글조회 (select)
 	public BoardVO read(Long bno);

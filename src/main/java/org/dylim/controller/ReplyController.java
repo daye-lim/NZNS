@@ -38,12 +38,7 @@ public class ReplyController {
 			consumes = "application/json",
 			produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> create(@RequestBody ReplyVO vo){	
-		
-		log.info("ReplyVO: " + vo);
-		
 		int insertCount = service.register(vo);	// 추가된 댓글 수
-		log.info("Reply INSERT COUNT : " + insertCount);
-		
 		return insertCount == 1
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -55,9 +50,7 @@ public class ReplyController {
 					MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno){
-		log.info("Reply get List..........");
 		Criteria cri = new Criteria(page,10);
-		log.info(cri);
 		return new ResponseEntity<>(service.getListPage(cri, bno),HttpStatus.OK);
 	}
 	
@@ -66,7 +59,6 @@ public class ReplyController {
 			produces = { MediaType.APPLICATION_XML_VALUE,
 					MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<ReplyVO> get(@PathVariable("rno") Long rno){
-		log.info("Reply get: " + rno);
 		return new ResponseEntity<>(service.get(rno),HttpStatus.OK);
 	}
 	
@@ -75,7 +67,6 @@ public class ReplyController {
 	@DeleteMapping(value = "/{rno}",
 			produces = { MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<String> remove(@PathVariable("rno") Long rno){
-		log.info("Reply remove: " + rno);
 		return service.remove(rno) == 1
 				? new ResponseEntity<>("success",HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -86,11 +77,8 @@ public class ReplyController {
 			value = "/{rno}",
 			consumes = "application/json",
 			produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno){
-		
+	public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno){		
 		vo.setRno(rno);
-		log.info("rno: " + rno);
-		log.info("Reply modify: " + vo);
 		return service.modify(vo) == 1
 				? new ResponseEntity<>("success",HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

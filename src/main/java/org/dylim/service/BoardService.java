@@ -24,9 +24,6 @@ public interface BoardService {
 	// 게시글 추천
 	public void recommend(Long bno);
 	
-	// 게시물 목록 조회
-//	public List<BoardVO> getList();			// returnType=List<BoardVO>
-	
 	// 게시물 목록 조회 (페이징)
 	public List<BoardVO> getList(Criteria cri);
 	
@@ -37,7 +34,7 @@ public interface BoardService {
 	public List<BoardAttachVO> getAttachList(Long bno);
 	
 	
-	// 게시물 목록 조회
-	public List<BoardVO> BestReviews();			// returnType=List<BoardVO>
+	// 베스트게시물 조회
+	public List<BoardVO> BestReviews();	
 
 }
