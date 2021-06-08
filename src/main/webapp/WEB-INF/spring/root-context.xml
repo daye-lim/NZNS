@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	
+	<!-- Root Context:defines shared resources visible to all other web components -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul"></property> -->
+	
+	
+	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+	<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/nzns?serverTimezone=Asia/Seoul"></property>
+	<property name="username" value="root"></property>
+	<property name="password" value="1234"></property>
+	</bean>
+	
+
+	<!-- HikariCP configuration -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	<constructor-arg ref="hikariConfig" />
+	</bean>
+	
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+	
+	<!-- 트랜잭션을 관리하는 빈(객체) 등록  -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 어노테이션 기반으로 트랜잭션을 설정할 수 있도록한다  -->
+	<tx:annotation-driven/>
+	
+	
+
+    <!-- navermail설정 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+     <property name="host" value="smtp.naver.com"/> <!-- 메이서버 호스트 -->
+     <property name="port" value="587"/> <!-- 메이서버 포트번호 -->
+     <property name="username" value="yeahli14@naver.com"/> <!-- 자신의 이메일 아이디 -->
+     <property name="password" value=""/> <!-- 자신의 비밀번호 -->
+       <!-- 보안연결 SSL과 관련된 설정 -->
+     <property name="javaMailProperties">
+      <props>
+      <prop key="mail.smtp.auth">true</prop>
+      <prop key="mail.smtp.starttls.enable">true</prop>
+      <prop key="mail.smtps.checkserveridentity">true</prop>
+      <prop key="mail.smtps.ssl.trust">*</prop>
+      <prop key="mail.debug">true</prop>
+      <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+      </props>
+     </property>
+    </bean>
+
+		
+	
+	<!-- mapper패키지를 만들었으니, scan하여 존재여부를 확인 후 인식해라 -->
+	<mybatis-spring:scan base-package="org.dylim.mapper" />
+	
+	
+	
+	
+	<context:component-scan base-package="org.dylim.task"></context:component-scan>
+	<task:annotation-driven/> <!-- Quartz 설정에 어노테이션을 사용하기위해 설정 -->
+	
+	<context:annotation-config></context:annotation-config>
+	
+	
+	<!-- service패키지를 만들었으니, scan하여 존재여부를 확인 후 인식해라 -->
+	<context:component-scan base-package="org.dylim.service"></context:component-scan>
+	
+	<!-- org.dylim.aop패키지 스캔 => SampleServiceImpl클래스와 LogAdvice는 스프링의 빈(객체)로 등록된다 -->
+	<context:component-scan base-package="org.dylim.aop"></context:component-scan>
+	
+	<!-- 아래의 태그를 이용해서 LogAdvice에 설정한 @Before가 동작하게된다 -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	
+</beans>

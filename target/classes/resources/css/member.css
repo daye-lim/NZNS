@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+
+#content{
+	width:600px;
+	position:relative;
+	left:350px;
+	bottom:20px;
+}
+
+#ca{
+	text-align:center;
+	color:#369;
+	padding-bottom:30px;
+	font-size:50px;
+	font-weight:900;
+	padding-left:110px;
+}
+
+table.mtable {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-left: 3px solid #369;
+  margin : 20px 10px;
+}
+table.mtable th {
+  width: 147px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #153d73;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+
+}
+table.mtable td {
+  width: 349px;
+  padding: 10px;
+  vertical-align: top;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.joinbtn{
+	margin-left:250px;
+}
+
+.lb{
+	font-size:5px;
+}
+
+
+/* 중복아이디 존재하지않는 경우 */
+#id_input_lb1{
+	color:blue;
+	display:none;
+	
+}
+/* 중복아이디 존재하는 경우 */
+#id_input_lb{
+	color:red;
+	display:none;
+}
+
+/* email 인증번호 일치 여부*/
+ 
+.correct{
+    color : blue;
+    font-size:5px;
+}
+.incorrect{
+    color : red;
+    font-size:5px;
+}
+
+
+.footer{
+	width:1200px;
+	height:100px;
+	position:relative;
+	top:300px;
+}
+
+.footer li{
+	position:relative;
+	left:400px;
+}

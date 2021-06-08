@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dylim.mapper.BoardAttachMapper"> 
+
+<!-- BoardAttachMapper의 SQL을 처리하는 XML -->
+
+	
+	<!-- 첨부파일 추가 -->
+	<insert id="insert">
+	 insert into freeboard_attach (uuid, uploadPath, fileName, fileType, bno)
+	 values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno} )
+	</insert>
+	
+	
+	
+	<!-- 화면에서 첨부파일 삭제 -->
+	<delete id="delete">
+	 delete from freeboard_attach where uuid = #{uuid}
+	</delete>
+	
+	
+	<!-- 게시물 번호로 첨부파일 찾기 -->
+	<select id="findByBno" resultType="org.dylim.domain.BoardAttachVO">
+	 select * from freeboard_attach where bno = #{bno}
+	</select>
+	
+	<!-- 첨부파일 삭제 -->
+	<delete id="deleteAll">
+	 delete from freeboard_attach where bno = #{bno}
+	</delete>
+	
+	
+	<!-- 첨부파일 목록 조회 -->
+	<select id="getOldFiles" resultType="org.dylim.domain.BoardAttachVO">
+	 select * from freeboard_attach where uploadpath = DATE_FORMAT(sysdate()-1, '%Y-%m-%d');
+	  <!-- sysdate -1 = 어제 날짜 -->
+	</select>
+
+
+</mapper>

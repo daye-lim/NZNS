@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+#searchWrap{
+	position:relative;
+	left:270px;
+}
+
+#optionWrap{
+	position:relative;
+	top:50px;
+	right:100px;
+}
+
+form#searchBar{padding: 10px;}
+form#searchBar{padding: 10px; width: 800px;}
+button, ul, li.filterOpt, input, span.rangeValue{float:left;}
+div.rangeWrap{ height: 50px; width:350px; padding: 0 10px 0 10px; color: #369; }
+
+#search{ margin-right:10px;}
+
+ul{list-style:none;}
+input, button, li.filterOpt, ul, span.rangeValue{float:left;}
+ul#filterList{
+	display:inline-block;
+	margin-top:0;
+}
+ul.sublist{
+	padding:5px;
+	margin-top: 10px;
+	display:block;
+	position: absolute;
+	float: left;
+	display: none;
+	box-shadow: 1px 1px 3px 3px #888888;
+}
+li.filterOpt{
+	margin-right: 20px;
+	border-radius:10px;
+	padding: 4px 8px 8px 8px;
+	background-color: #369;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+}
+li.subfilter{
+	color:#369;
+}
+input[type='range']{
+	padding: 0;
+    margin: 0;
+    float: left;
+    margin-top: 10px;
+}
+.rangeWrap{height: 50px; width:350px; padding: 0 10px 0 10px;}
+.rangeLable{    
+	float: left;
+    position: absolute;
+    bottom: 0;
+    top: 75px;
+    width:350px;}
+ul#filterList{ display:inline-block; margin-top:0; }
+
+li.filterOpt{ margin-right: 20px; border-radius:10px; padding: 4px 8px 8px 8px; background-color: #369; color: white; font-weight: bold; cursor: pointer; }
+ul.sublist{ display: none; background-color: white; color: #369; padding:5px 5px 8px 5px ; margin-top: 15px; position: absolute; float: left; box-shadow: 1px 1px 3px 3px #888888; }
+
+input[type='range']{ padding: 0; margin: 0; float: left; margin-top: 10px; }
+div.rangeLable{ float: left; position: absolute; bottom: 0; top: 75px; width:350px;}
+  
+ .startValue{
+  position: absolute;
+ }
+ .middleValue{
+    left: 155px;
+    float: left;
+    position: absolute;
+ }
+ .endValue{
+     position: absolute;
+     left: 300px;
+ }
+span.startValue{ position: absolute; }
+span.middleValue{ left: 155px; float: left; position: absolute; }
+span.endValue{ position: absolute; left: 300px; }
+span.searchRange{ float:right; margin-top: -40px; }
+ 
+ 
+ span.searchRange{
+ 	float:right;
+    margin-top: -40px;
+ }
+ 
+ /*******************슬라이더 스타일 *****************/
+ .slider {
+  -webkit-appearance: none;
+  width: 100%;

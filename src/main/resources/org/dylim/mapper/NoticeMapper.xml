@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dylim.mapper.NoticeMapper"> 
+
+
+
+
+	<!-- 게시글 목록 조회 -->
+	<select id="getList" resultType="org.dylim.domain.NoticeVO">
+	 <!--  PK(nno)를 이용하도록 유도하는 조건 
+	 CDATA은 XML에서 부등호를 사용하기 위해 이용함. 부등호를 태그<>로 인식할수도있어서  -->
+		<![CDATA[select * from notice_board where nno>0]]>
+	</select>
+	
+	
+	<!-- 게시글 목록 조회 (페이징) -->
+	<select id="getListWithPaging" resultType="org.dylim.domain.NoticeVO">
+		<![CDATA[select nno, title, content, writer, regdate, updatedate
+		from (select @rownum:=@rownum+1 as rn, nno, title, content, writer, regdate, updatedate
+				from (select @rownum:=0) as tmp, notice_board
+				where 1=1 order by nno desc )noticeboardList where rn>(#{pageNum}-1)*#{amount} and rn<=#{pageNum}*#{amount}]]>
+	</select>
+
+
+	<!-- 전체 게시물의 수(total)를 구하는 메서드 -->
+	<select id="getTotalCount" resultType="int">
+		select count(*) from notice_board where nno > 0
+	</select>
+	
+	<!-- 목록과 데이터 개수 처리(동적SQL사용) -->
+	<sql id="criteria">
+	<!-- sql태그는 id라는 속성을 이용해서 필요한 경우에 동일한 SQL의 일부를 재사용가능하게함 -->
+	 <trim prefix=" AND (" suffix=") " prefixOverrides="OR">
+	  <foreach item='type' collection="typeArr">
+	  
+	   <!-- foreach를 이용해서 검색 조건들을 처리하는데 typeArr 속성 이용
+		 MyBatis는 원하는 속성을 찾을 때 getTypeArr()과 같이 이름에 기반을 두어서 검색하기 때문에
+		 Criteria에서 만들어둔 getTypeArr()결과인 문자열의 배열이 <foreach>의 대상이된다. -->
+		 
+		 
+	   <trim prefix="OR">
+	    <choose>
+	    <!-- choose 안쪽의 동적SQL은 OR title...OR content...OR writer와 같은 구문을 만들어내므로 
+			trim을 이용해서 맨 앞에서 생성되는 OR을 없애준다 -->
+			
+	     <when test="type == 'T'.toString()">
+	      title like concat('%',#{keyword},'%')
+	     </when>
+	      <when test="type == 'C'.toString()">
+	      content like concat('%',#{keyword},'%')
+	     </when>
+	      <when test="type == 'W'.toString()">
+	      writer like concat('%',#{keyword},'%')
+	     </when>	     
+	     </choose>
+	    </trim>
+	  </foreach>
+	  </trim>
+	</sql>
+	
+
+	<!-- insert만 처리되고 생성된 PK값을 알 필요가 없는 경우 -->
+	<insert id="insert">
+		insert into notice_board (title,content,writer)
+		values (#{title}, #{content}, #{writer})
+	</insert>
+
+	<!-- insert만 처리되고 생성된 PK값을 알아야 하는 경우 -->
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="nno" order="BEFORE" resultType="long">
+			select max(nno)+1 from notice_board
+		</selectKey>
+		
+		insert into notice_board (nno,title,content,writer)
+		values (#{nno},#{title}, #{content}, #{writer})
+	</insert>
+	
+	
+	<!-- 게시글 조회 -->
+	<select id="read" resultType="org.dylim.domain.NoticeVO">
+		select * from notice_board where nno = #{nno}
+	</select>
+
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete">
+		delete from notice_board where nno = #{nno}
+	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id="update">
+		update notice_board
+		set title= #{title},
+		content=#{content},
+		writer = #{writer},
+		updateDate = sysdate()
+		where nno = #{nno}
+	</update>
+
+
+
+</mapper>

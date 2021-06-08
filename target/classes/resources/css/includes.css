@@ -1,0 +1,111 @@
+body{
+width:1200px;
+margin:0 auto;
+font-size:10pt;
+font-family: arita-Bold;}
+
+.title{
+	position: relative;
+	left:430px;	
+}
+
+#main_logo{
+	margin-top:5px;
+	width:400px;
+	height:200px;
+}
+
+.menu{
+	width:1200px;
+	height:50px;
+	position: relative;
+	left:80px;
+/* 	bottom:20px; */
+	font-size:30px;
+	font-weight:900;
+	font-family: arita-Bold;
+	word-spacing:30px;
+	color:black;
+}
+
+.nav li{
+	display:inline;
+	padding-left:50px;
+}
+
+.nav a{
+	color: #369;
+}
+
+p{
+	text-align: center;
+	position: relative;
+	right: 400px;
+	font-weight:500;
+}
+
+.login{
+	width:200px;
+	height:50px;
+	position:relative;
+	left:1000px;
+	bottom:150px;
+}
+
+.login{
+	font-weight:900;
+	font-size: 15px;
+}
+
+
+.login_s{
+	width:400px;
+	height:50px;
+	position:relative;
+/* 	left:800px; */
+	bottom:200px;
+
+}
+
+.login_s li{
+	width:400px;
+	list-style-type:none;
+	font-weight:900;
+	font-size: 15px;
+	position:relative;
+	left:980px;
+}
+
+#member_Icon{
+	width: 20px;
+	height: 20px;
+	padding-right: 3px;
+}
+
+.login li{
+	display:inline;
+}
+
+a{
+	text-decoration:none;
+	color: black;
+
+}
+
+
+
+.footer{
+	width:1200px;
+	height:100px;
+	position:relative;
+	float:right;
+
+}
+
+.footer ul{
+	text-align:center;
+	position:relative;
+	right:380px;
+	list-style-type:none;
+	bottom:200px;
+}

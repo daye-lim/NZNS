@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="org.dylim.mapper.MemberMapper">
+
+  
+	<!-- 아이디 중복검사 -->
+<select id="idCheck" resultType="int">
+  		<!-- select count(*) from member_i where id = #{id} -->
+  		select count(*)
+		from member_i join member_b 
+		on member_i.id=#{id} or member_b.id=#{id}
+</select>
+
+	<!-- 로그인 -->
+<select id="Login" resultType="org.dylim.domain.memberVO">
+<!-- 기존코드   --> 
+           select id, name, adminCk from member_i where id = #{id} and password = #{password}
+		union
+		   select id, name, adminCk from member_b where id = #{id} and password = #{password} 
+		   
+		  <!-- 암호화 후 코드      select id, name, adminck from member_i where id = #{id} -->  
+</select>
+
+
+
+	<!-- 개인회원 회원가입 -->
+<insert id="m_register">
+  		insert into member_i values
+  		(#{id}, #{password}, #{name}, #{birth}, #{email}, #{phone}, 0)
+</insert>
+
+	<!-- 개인회원정보 조회 -->
+<select id="readMember" parameterType="map" resultType="org.dylim.domain.member_iVO">
+         select * from member_i where id = #{id} and password = #{password}
+</select>
+
+	<!-- 개인회원정보 수정 -->
+<update id="updateMember" parameterType="org.dylim.domain.member_iVO">
+		update member_i set password = #{password}, name = #{name}, email = #{email}, phone = #{phone}
+		where id= #{id}
+</update>
+
+	<!-- 개인회원 탈퇴 -->
+<delete id="deleteMember" parameterType="string">
+		delete from member_i where id=#{id}
+</delete>
+
+	<!-- 비즈니스회원 회원가입 -->
+<insert id="b_register">
+  		insert into member_b values
+  		(#{id}, #{password}, #{name}, #{owner_name},
+  		 #{cor_num}, #{email}, #{postcode}, #{address1},
+  		 #{address2}, #{tel}, true, 1 )
+</insert>
+
+	<!-- 비즈니스회원정보 조회 -->
+<select id="readAgent" parameterType="map" resultType="org.dylim.domain.member_bVO">
+         select * from member_b where id = #{id} and password = #{password}
+</select>
+
+	<!-- 비즈니스회원정보 수정 -->
+<update id="updateAgent" parameterType="org.dylim.domain.member_bVO">
+		update member_b set 
+		password = #{password}, name = #{name}, owner_name = #{owner_name}, cor_num = #{cor_num},
+		email = #{email}, postcode = #{postcode}, 
+		address1 = #{address1}, address2 = #{address2}, tel = #{tel}
+		where id= #{id}
+</update>
+
+	<!-- 비즈니스회원 탈퇴 -->
+<delete id="deleteAgent" parameterType="string">
+		delete from member_b where id=#{id}
+</delete>
+
+
+
+  </mapper>
