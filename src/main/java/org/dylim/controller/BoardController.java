@@ -39,17 +39,6 @@ public class BoardController {
 	
 	private BoardService service;
 	
-	/* 게시물 목록 조회
-	@GetMapping("/list")
-	public void list(Model model) {
-		
-		log.info("list");
-		model.addAttribute("list",service.getList());
-		// addAttribute (get 형식) String 문자열을 전달
-		
-	} */
-	
-
 	
 	/* 게시물 목록 조회 (페이징) */
 	@GetMapping("/list")
