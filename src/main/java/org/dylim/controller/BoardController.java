@@ -38,8 +38,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	
 	private BoardService service;
-	
-	
+		
 	/* 게시물 목록 조회 (페이징) */
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {

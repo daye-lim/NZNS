@@ -192,30 +192,21 @@
 			
 			
 			/* 페이지번호클릭시 동작하게하는 작업 */
-			// <a>태그를 클릭해도 페이지 이동이 없도록 preventDefault()처리
 			// <form>태그 내 pageNum값은 href속성값으로 변경
 			var actionForm = $("#actionForm");
-			// class 이름이 paginate_button 이면서 a태그인것을 선택
 			$(".paginate_button a").on("click",function(e){
 				e.preventDefault();
-				console.log("click");				// ▼사용자가 선택한(this), class 이름이 paginate_button 이면서 a태그의 href에 있는 값을 가져오라
+				console.log("click");
 				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-				
-				
-				// actionForm 자체를 submit()시킴 -> action을 실행 -> controller로
 				actionForm.submit();
 			});
 			
 			
 			/* 게시물 제목 클릭했을때 이동하도록 하는 작업 */
-			// list.jsp 게시물 조회를 위한 이벤트 처리 추가
-			// 게시물 제목 클릭 시 pageNum과 amount의 파라미터가 전달됨
 			$(".move").on("click",function(e){
 				
 				e.preventDefault();
-			// 게시물 제목 클릭 시 form태그에 추가로 bno값을 전송하기 위해 input태그를 만들어서 추가하고
 				actionForm.append("<input type='hidden' name='bno' value='"+$(this).attr("href")+"'>");
-			// form태그의 action은 /board/get으로 변경
 				actionForm.attr("action","/board/get");
 				actionForm.submit();
 			})

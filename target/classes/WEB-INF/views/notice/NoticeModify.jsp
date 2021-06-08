@@ -138,7 +138,7 @@ $(document).ready(function(){
 			formObj.append(typeTag);
 		}
 		
-		// p.590 첨부파일 게시물 수정작업
+		//첨부파일 게시물 수정
 		else if(operation === 'modify'){
 			
 			console.log("submit clicked");

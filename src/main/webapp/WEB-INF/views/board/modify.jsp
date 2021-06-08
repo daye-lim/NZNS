@@ -94,7 +94,7 @@
             </div>
             <!-- /.row -->
             
-     <!-- P.572 첨부파일이 보여질 영역 -->
+     <!-- 첨부파일이 보여질 영역 -->
             <div class='bigPictureWrapper'>
              <div class='bigPicture'><!-- 첨부파일 원본 이미지를 보여주는 부분 -->
              </div>
@@ -172,7 +172,7 @@ $(document).ready(function(){
 			formObj.append(typeTag);
 		}
 		
-		// p.590 첨부파일 게시물 수정작업
+		// 첨부파일 게시물 수정작업
 		else if(operation === 'modify'){
 			
 			console.log("submit clicked");
@@ -200,7 +200,7 @@ $(document).ready(function(){
 	});
 });
 
-//p.584 게시물 수정화면에서 첨부파일 데이터 보여주기
+//게시물 수정화면에서 첨부파일 데이터 보여주기
 $(document).ready(function(){
 	(function(){
 		var bno = '<c:out value="${board.bno}"/>';
@@ -209,7 +209,7 @@ $(document).ready(function(){
 			
 			console.log(arr);
 			
-			//p.574 첨부파일 보여주기
+			//첨부파일 보여주기
 			var str = "";
 			
 			$(arr).each(function(i, attach){
@@ -255,8 +255,6 @@ $(document).ready(function(){
 	});
 
 	
-	//p.589	
-	
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 	var maxSize = 5242880; // 5MB
 
@@ -298,9 +296,9 @@ $("input[type='file']").change(function(e){
 		data: formData,
 		type : 'POST',
 		datatype:'json',		// Ajax를 호출했을 때 결과타입은 json
-			success : function(result){ // 결과를 consloe.log()로 찍도록 설정한다
+			success : function(result){
 				console.log(result);
-				showUploadResult(result); // 업로드 결과 처리 함수
+				showUploadResult(result);
 			}
 	}); // end $.ajax
 });

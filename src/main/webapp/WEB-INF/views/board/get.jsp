@@ -238,9 +238,7 @@ color:#369;}
           
           
           
-            
-<!-- p.265 -->
- <script type="text/javascript">
+<script type="text/javascript">
  	$(document).ready(function(){
  		var operForm = $("#operForm");
  		$("button[data-oper='modify']").on("click",function(e){
@@ -255,7 +253,7 @@ color:#369;}
  	});
  </script>
  
-  <!-- p.400 모듈 구성하기 -->
+
  <script type="text/javascript" src="/resources/js/reply.js"></script>
  <script type="text/javascript">
  
@@ -263,9 +261,7 @@ color:#369;}
 	 console.log(replyService);
  });
  </script> 
- 
- <!-- p.404  -->
- 
+
  <script>
  	console.log("===================");
  	console.log("JS TEST");
@@ -273,7 +269,7 @@ color:#369;}
  	var bnoValue = '<c:out value="${board.bno}"/>';
 
  	
- 	//p.413 댓글 조회 처리
+ 	//댓글 조회
  	replyService.get(10, function(data){
  		console.log(data);
  	});
@@ -281,7 +277,7 @@ color:#369;}
  </script>
  
  
- <!-- p.415~416 댓글 목록 이벤트 처리 -->
+ <!--댓글 목록 이벤트 처리 -->
  <script>
 	$(document).ready(function(){
 		var bnoValue = '<c:out value="${board.bno}"/>';
@@ -322,12 +318,12 @@ color:#369;}
 				
 				replyUL.html(str);
 				
-				showReplyPage(replyCnt); //p.441 
+				showReplyPage(replyCnt);
 					}); //end function
 				
 			} //end showList
 				
-			//p.421 새로운 댓글의 추가 버튼 이벤트 처리
+			//새로운 댓글 추가 버튼 이벤트 처리
 				
 				var modal = $(".modal");
 				var modalInputReply = modal.find("input[name='reply']");
@@ -349,24 +345,24 @@ color:#369;}
 				});
 				
 				
-			//p.423 새로운 댓글 추가 처리
+			//새로운 댓글 추가
 			
 			modalRegisterBtn.on("click", function(e){//댓글쓰기
 				
 				var reply = {
 					reply: modalInputReply.val(),
 					replyer: modalInputReplyer.val(),
-					bno:bnoValue //p.404
+					bno:bnoValue
 					};
 			
-				replyService.add(reply,function(result){//p.403
+				replyService.add(reply,function(result){
 					
 					alert(result);
 				
 					modal.find("input").val("");
 					modal.modal("hide");
 					
-					//p.424 댓글 목록 갱신 
+					//댓글 목록 갱신 
 					//showList(1);
 					showList(-1);
 					
@@ -405,11 +401,11 @@ color:#369;}
 					
 					alert(result);
 					modal.modal("hide");
-					showList(pageNum); //p.442 댓글 수정
+					showList(pageNum); //댓글 수정
 				});
 			}); // end modalModBtn
 			
-			//p.427 댓글 삭제
+			//댓글 삭제
 			
 			modalRemoveBtn.on("click", function(e){
 				var rno = modal.data("rno");
@@ -418,11 +414,10 @@ color:#369;}
 					
 					alert(result);
 					modal.modal("hide");
-					showList(pageNum); //p.442 댓글삭제
+					showList(pageNum); //댓글삭제
 				});
 			}); //end modalRemoveBtn
 			
-			//p.440
 			
 			var pageNum = 1;
 			var replyPageFooter = $(".panel-footer");
@@ -465,10 +460,10 @@ color:#369;}
 				console.log(str);
 				
 				replyPageFooter.html(str);
-			} //p.440 showReplyPage 끝
+			} //showReplyPage 끝
 				
 				
-			//p.441 페이지 번호 클릭했을때 새로운 댓글을 가져오도록하는 작업
+			//페이지 번호 클릭했을때 새로운 댓글을 가져오도록하는 작업
 			replyPageFooter.on("click", "li a", function(e){
 				e.preventDefault();
 				console.log("page click");
@@ -482,7 +477,7 @@ color:#369;}
 				showList(pageNum);
 			}); //end replyPageFooter
 			
-			//p.571 게시물 조회 화면의 처리
+			//게시물 조회 화면 처리
 			$(document).ready(function(){
 				(function(){
 					var bno = '<c:out value="${board.bno}"/>';
@@ -491,7 +486,7 @@ color:#369;}
 						
 						console.log(arr);
 						
-						//p.574 첨부파일 보여주기
+						//첨부파일 보여주기
 						var str = "";
 						
 						$(arr).each(function(i, attach){
@@ -522,20 +517,16 @@ color:#369;}
 				
 			});
 		
-			//p.575 첨부파일 클릭시 이벤트 처리
+			//첨부파일 클릭시 이벤트 처리
 		$(".uploadResult").on("click","li", function(e){
-			
-			console.log("view image");
-			//p.575 첨부파일 클릭 시 이벤트 처리
+
 			var liObj = $(this);
 			
 			var path = encodeURIComponent(liObj.data("path")+"/" + liObj.data("uuid")+"_" + liObj.data("filename"));
 			
 			if(liObj.data("type")){
 				showImage(path.replace(new RegExp(/\\/g), "/"));
-			// showImage() = 해당경로의 이미지를 보여주는 역할을 한다
 			}else{
-				//downliad
 				self.location ="/download?fileName="+path
 			}
 			
@@ -551,7 +542,7 @@ color:#369;}
 					.animate({width:'100%', height: '100%'},1000);
 			}
 			
-			//p.577 원본 이미지 창 닫기
+			//원본 이미지 창 닫기
 			$(".bigPictureWrapper").on("click", function(e){
 				
 				$(".bigPicture")

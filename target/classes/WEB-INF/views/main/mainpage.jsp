@@ -38,7 +38,7 @@ table#mtable td {
 
 <div class="map">
 	<h1>부동산 위치 찾기</h1>
-	<%@include file="../house/findHouse.jsp" %>
+	<%@include file="../includes/findAgent.jsp" %>
 </div>
 
 

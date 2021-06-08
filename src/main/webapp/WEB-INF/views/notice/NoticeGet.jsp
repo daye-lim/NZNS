@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- JSTL의 출력과 포맷을 적용할 수 있는 태그 라이브러리 추가 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript" src="/resources/js/jquery-3.5.1.js"></script>
@@ -98,7 +97,7 @@ color:#369;}
                         		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
                         		<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
                         		<input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
-                        	</form><!-- 브라우저에서는 form태그의 내용은 보이지 않고 버튼만 보이게 된다 -->
+                        	</form>
               </div>
 		   <!-- end panel-body -->
 		  </div>
@@ -117,7 +116,7 @@ color:#369;}
 
 
             
-<!-- p.265 -->
+
  <script type="text/javascript">
  	$(document).ready(function(){
  		var operForm = $("#operForm");

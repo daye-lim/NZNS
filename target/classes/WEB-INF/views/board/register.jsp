@@ -199,7 +199,6 @@ $("input[type='file']").change(function(e){
 	}); // end $.ajax
 });
 	
-//p.558
 function showUploadResult(uploadResultArr){ // 업로드 결과를 화면에 처리
 	if(!uploadResultArr || uploadResultArr.length == 0) { return; }
 	
@@ -209,7 +208,6 @@ function showUploadResult(uploadResultArr){ // 업로드 결과를 화면에 처
 	
 	$(uploadResultArr).each(function(i,obj){
 		
-		//p.559
 		// image type(이미지파일인경우 / 일반파일인경우)
 		if(obj.image){
 			var fileCallPath = encodeURIComponent( obj.uploadPath+ "/s_" + obj.uuid + "_" + obj.fileName);
@@ -241,7 +239,7 @@ function showUploadResult(uploadResultArr){ // 업로드 결과를 화면에 처
 	uploadUL.append(str);
 }
 
-//p.560 첨부파일의 변경 처리
+//첨부파일 변경
 $(".uploadResult").on("click", "button", function(e){
 	
 	console.log("delete file");
